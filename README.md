@@ -4,6 +4,7 @@
  - Face-Detector-1MB slim和RFB版本的训练/测试/评估/ncnn C++推理
  - 人脸5个关键点检测
  - 支持onnx导出
+ - 网络parameter和flop计算
 # 带有关键点检测的超轻量级人脸检测器
 
 提供了一系列适合移动端部署包含关键的人脸检测器: 对[Retinaface-mobile0.25](https://github.com/biubug6/Pytorch_Retinaface)修改anchor尺寸,使其更适合边缘计算; 重新实现了[Face-Detector-1MB](https://github.com/Linzaer/Ultra-Light-Fast-Generic-Face-Detector-1MB) 并添加了关键点检测和ncnn C++部署功能, 在绝大部分情况下精度均好于原始版本.
@@ -20,7 +21,7 @@
 
  - 在wider face val精度（单尺度输入分辨率：**320*240**）
  
-模型|Easy|Medium|Hard
+ 方法|Easy|Medium|Hard
 ------|--------|----------|--------
 libfacedetection v1（caffe）|0.65 |0.5       |0.233
 libfacedetection v2（caffe）|0.714 |0.585       |0.306
@@ -32,7 +33,7 @@ Retinaface-Mobilenet-0.25(our)  |0.811|0.697|0.376
 
 - 在wider face val精度（单尺度输入分辨率：**640*480**） 
 
-模型|Easy|Medium|Hard 
+方法|Easy|Medium|Hard 
 ------|--------|----------|--------
 libfacedetection v1（caffe）|0.741 |0.683       |0.421
 libfacedetection v2（caffe）|0.773 |0.718       |0.485
@@ -43,6 +44,17 @@ version-RFB(our)|0.865    |0.828       |0.622
 Retinaface-Mobilenet-0.25(our)  |**0.873**|**0.836**|**0.638**
 
 ps: 测试的时候,长边为320 或者 640 ,图像等比例缩放.
+
+## Parameter and flop
+
+方法|parameter(M)|flop(M) 
+------|--------|----------
+version-slim(our)|0.343     |98.793
+version-RFB(our)|0.359    |118.435
+Retinaface-Mobilenet-0.25(our)  |0.426|193.921
+
+ps: 320*240作为输入
+
 
 ### Contents
 - [Installation](#installation)

@@ -15,12 +15,10 @@ using namespace std::chrono;
 class Timer
 {
 public:
-    // std::stack<clock_t> tictoc_stack;
     std::stack<high_resolution_clock::time_point> tictoc_stack;
 
     void tic()
     {
-        // tictoc_stack.push(clock());
         high_resolution_clock::time_point t1 = high_resolution_clock::now();
         tictoc_stack.push(t1);
     }
@@ -29,9 +27,7 @@ public:
     {
         double diff = duration_cast<milliseconds>(high_resolution_clock::now() - tictoc_stack.top()).count();
         if(msg.size() > 0){
-            //fprintf(stderr, "%s time elapsed: %f ms\n", msg.c_str(), diff);
             if (flag)
-                //LOGINFO("%s time elapsed: %f ms\n", msg.c_str(), diff);
                 printf("%s time elapsed: %f ms\n", msg.c_str(), diff);
         }
 
@@ -40,17 +36,21 @@ public:
     }
     void reset()
     {
-        // tictoc_stack = std::stack<clock_t>();
         tictoc_stack = std::stack<high_resolution_clock::time_point>();
     }
 };
 
+struct Point{
+    float _x;
+    float _y;
+};
 struct bbox{
     float x1;
     float y1;
     float x2;
     float y2;
     float s;
+    Point point[5];
 };
 
 struct box{
@@ -91,4 +91,4 @@ public:
 
     ncnn::Net *Net;
 };
-#endif //FASTDETECTOR_H
+#endif //

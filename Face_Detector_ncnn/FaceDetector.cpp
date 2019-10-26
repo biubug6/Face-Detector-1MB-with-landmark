@@ -66,6 +66,7 @@ void Detector::Detect(cv::Mat& bgr, std::vector<bbox>& boxes)
     std::vector<bbox > total_box;
     float *ptr = out.channel(0);
     float *ptr1 = out1.channel(0);
+    float *landms = out2.channel(0);
 
     // #pragma omp parallel for num_threads(2)
     for (int i = 0; i < anchor.size(); ++i)
@@ -75,6 +76,8 @@ void Detector::Detect(cv::Mat& bgr, std::vector<bbox>& boxes)
             box tmp = anchor[i];
             box tmp1;
             bbox result;
+
+            // loc and conf
             tmp1.cx = tmp.cx + *ptr * 0.1 * tmp.sx;
             tmp1.cy = tmp.cy + *(ptr+1) * 0.1 * tmp.sy;
             tmp1.sx = tmp.sx * exp(*(ptr+2) * 0.2);
@@ -93,10 +96,19 @@ void Detector::Detect(cv::Mat& bgr, std::vector<bbox>& boxes)
             if (result.y2>in.h)
                 result.y2 = in.h;
             result.s = *(ptr1 + 1);
+
+            // landmark
+            for (int j = 0; j < 5; ++j)
+            {
+                result.point[j]._x =( tmp.cx + *(landms + (j<<1)) * 0.1 * tmp.sx ) * in.w;
+                result.point[j]._y =( tmp.cy + *(landms + (j<<1) + 1) * 0.1 * tmp.sy ) * in.h;
+            }
+
             total_box.push_back(result);
         }
-        ptr = ptr + 4;
+        ptr += 4;
         ptr1 += 2;
+        landms += 10;
     }
 
     std::sort(total_box.begin(), total_box.end(), cmp);

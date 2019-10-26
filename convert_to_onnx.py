@@ -16,7 +16,7 @@ from utils.timer import Timer
 
 
 parser = argparse.ArgumentParser(description='Test')
-parser.add_argument('-m', '--trained_model', default='./weights_RFB/RBF_Final.pth',
+parser.add_argument('-m', '--trained_model', default='./weights/RBF_Final.pth',
                     type=str, help='Trained state_dict file path to open')
 parser.add_argument('--network', default='RFB', help='Backbone network mobile0.25 or slim or RFB')
 parser.add_argument('--long_side', default=320, help='when origin_size is false, long_side is scaled size(320 or 640 for long side)')

@@ -17,7 +17,7 @@ from utils.timer import Timer
 
 
 parser = argparse.ArgumentParser(description='Test')
-parser.add_argument('-m', '--trained_model', default='./weights_RFB/RBF_Final.pth',
+parser.add_argument('-m', '--trained_model', default='./weights/RBF_Final.pth',
                     type=str, help='Trained state_dict file path to open')
 parser.add_argument('--network', default='RFB', help='Backbone network mobile0.25 or slim or RFB')
 parser.add_argument('--origin_size', default=True, type=str, help='Whether use origin image size to evaluate')
@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
     # testing begin
     for i in range(100):
-        image_path = "./curve/sample.jpg"
+        image_path = "./img/sample.jpg"
 
         img_raw = cv2.imread(image_path, cv2.IMREAD_COLOR)
         img = np.float32(img_raw)

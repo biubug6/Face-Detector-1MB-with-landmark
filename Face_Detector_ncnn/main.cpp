@@ -26,7 +26,10 @@ int main(int argc, char** argv)
     string bin = "../model/face.bin";
     const int max_side = 320;
 
-    Detector detector(param, bin);
+    // slim or RFB
+    Detector detector(param, bin, false);
+    // retinaface
+    // Detector detector(param, bin, true);
     Timer timer;
     for	(int i = 0; i < 1000; i++){
 

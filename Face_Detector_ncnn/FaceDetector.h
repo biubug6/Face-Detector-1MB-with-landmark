@@ -68,7 +68,7 @@ public:
 
     void Init(const std::string &model_param, const std::string &model_bin);
 
-    Detector(const std::string &model_param, const std::string &model_bin);
+    Detector(const std::string &model_param, const std::string &model_bin, bool retinaface = false);
 
     inline void Release();
 
@@ -77,6 +77,8 @@ public:
     void Detect(cv::Mat& bgr, std::vector<bbox>& boxes);
 
     void create_anchor(std::vector<box> &anchor, int w, int h);
+
+    void create_anchor_retinaface(std::vector<box> &anchor, int w, int h);
 
     inline void SetDefaultParams();
 
@@ -88,6 +90,7 @@ public:
     float _nms;
     float _threshold;
     float _mean_val[3];
+    bool _retinaface;
 
     ncnn::Net *Net;
 };

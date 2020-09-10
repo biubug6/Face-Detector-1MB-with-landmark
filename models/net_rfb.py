@@ -55,7 +55,7 @@ class BasicRFB(nn.Module):
 
         self.ConvLinear = BasicConv(6 * inter_planes, out_planes, kernel_size=1, stride=1, relu=False)
         self.shortcut = BasicConv(in_planes, out_planes, kernel_size=1, stride=stride, relu=False)
-        self.relu = nn.ReLU(inplace=False)
+        self.relu = nn.ReLU(inplace=True)
 
     def forward(self, x):
         x0 = self.branch0(x)

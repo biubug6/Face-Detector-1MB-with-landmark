@@ -172,7 +172,7 @@ void Retinaface::face_detect(cv::Mat& img, std::vector<landmark>& boxes)
 	tensor_boxes->copyToHostTensor(&tensor_boxes_host);
 	tensor_ldmarks->copyToHostTensor(&tensor_ldmarks_host);
 
-	compose_results(img, tensor_scores, tensor_boxes, tensor_ldmarks, boxes);
+	compose_results(img, tensor_scores_host, tensor_boxes_host, tensor_ldmarks_host, boxes);
 
 }
 
